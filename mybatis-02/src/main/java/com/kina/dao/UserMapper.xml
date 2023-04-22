@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace绑定对应的dao/Mapper接口-->
+<mapper namespace="com.kina.dao.UserMapper">
+
+    <!--select查询-->
+    <!--id就是对应的namespace中的方法名-->
+    <!--resultType返回值类型-->
+    <select id="getUserList" resultType="user">
+        select * from mybatis.user
+    </select>
+    <select id = "getUserById" parameterType = "int" resultType="com.kina.pojo.User">
+        select * from user where id = #{id}
+    </select>
+    <!--对象中的属性可以直接取出来-->
+    <insert id = "addUser" parameterType="com.kina.pojo.User">
+        insert into user(id, name, pwd) values(#{id},#{name},#{pwd});
+    </insert>
+    <update id="updateUser" parameterType="com.kina.pojo.User">
+        update user set name = #{name}, pwd = #{pwd} where id = #{id};
+    </update>
+    <delete id="deleteUser" parameterType="int">
+        delete from user where id = #{id};
+    </delete>
+</mapper>
